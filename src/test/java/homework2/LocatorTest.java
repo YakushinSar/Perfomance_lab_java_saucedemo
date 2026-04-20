@@ -42,7 +42,6 @@ public class LocatorTest {
 
         driver.findElement(By.cssSelector(".app_logo"));
         driver.findElement(By.cssSelector(".btn.btn_primary"));
-
         driver.findElement(By.cssSelector("button"));
         driver.findElement(By.cssSelector("button.btn_inventory"));
         driver.findElement(By.cssSelector("[id^='add-to-cart']"));
