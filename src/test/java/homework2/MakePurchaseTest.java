@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MakePurchaseTest {
@@ -46,8 +47,10 @@ d. Проверить (assertEquals) стоимость товара и его �
         String itemNameAfter = driver.findElement(By.xpath("//div[@class='inventory_item_name']")).getText();
         String itemPriceAfter = driver.findElement(By.xpath("//div[@class='inventory_item_price']")).getText();
 
-        assertEquals(itemNameBefore, itemNameAfter);
-        assertEquals(itemPriceBefore, itemPriceAfter);
+        assertAll(
+                () -> assertEquals(itemNameBefore, itemNameAfter),
+                () -> assertEquals(itemPriceBefore, itemPriceAfter)
+        );
         driver.quit();
     }
 }
