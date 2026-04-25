@@ -1,7 +1,6 @@
-package lesson3.tests;
+package homework3.tests;
 
-import lesson3.pages.LoginPage;
-import lesson3.pages.ProductsPage;
+import homework3.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,9 +14,11 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
+    CartPage cartPage;
+    CheckoutInfoPage checkoutInfoPage;
+    CheckoutOverviewPage checkoutOverviewPage;
+    CheckoutCompletePage checkoutCompletePage;
 
-
-    //    работает перед каждым тестовым методом
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
@@ -33,10 +34,12 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
-
+        cartPage = new CartPage(driver);
+        checkoutInfoPage = new CheckoutInfoPage(driver);
+        checkoutOverviewPage = new CheckoutOverviewPage(driver);
+        checkoutCompletePage = new CheckoutCompletePage(driver);
     }
 
-    //    Выполнить после каждого теста, выполнить ДАЖЕ если тест упал/пропущен
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
