@@ -7,10 +7,17 @@ IFrame - это когда страница находится внутри др
   работать с фреймом - надо сначала переключится на него, провести необходимые манипуляции, а затем выйти из фрейма. Если
   не выйти из iFrame, дальнейшие поиски элементов будут вестись внутри него, а не на основной странице
 
-1. driver.switchTo().frame(0); - переключение по индексу (счёт с 0)
-2. driver.switchTo().frame("frameName"); - переключение по id или name
-3. WebElement iframe = driver.findElement(By.tagName("iframe")); - переключение по WebElement
-driver.switchTo().frame(iframe);
-4. driver.switchTo().defaultContent(); - // вернуться к основному содержимому страницы
+Работа с frame:
+•Получение ссылки на iframe
+WebElementiframe= driver.findElement(By.cssSelector("#modal>iframe"));
+•Переключение в iframe
+driver.switchTo().frame(iframe); // Переключение в `iframe` по элементу
+driver.switchTo().frame("buttonframe");// Переключение в `iframe` по `id`
+driver.switchTo().frame("myframe");// Переключение в `iframe` по `name`
+driver.switchTo().frame(1); // Переключение в `iframe` по индексу
+•Возврат в основной контекст
+driver.switchTo().defaultContent();
+
+https://www.selenium.dev/documentation/webdriver/interactions/frames/
      */
 }

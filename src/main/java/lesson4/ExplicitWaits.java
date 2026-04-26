@@ -2,10 +2,29 @@ package lesson4;
 
 public class ExplicitWaits {
     /*
-Ожидания НЕ являются проверками, они используются для работы с элементами. Ассерт является проверкой.
+# Не смешивай неявные и явные ожидания. Золотое правило автоматизации на Selenium: Забудь про implicitlyWait. Используй
+ только WebDriverWait + ExpectedConditions — они покрывают все сценарии. Неявное ожидание добавляет свою задержку ко времени
+ выполнения явного ожидания, потому что каждый вызов findElement внутри явного ожидания сначала отрабатывает с неявным таймаутом.
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // неявное
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // явное
+wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("someId")));
+Что происходит:
+visibilityOfElementLocated вызывает findElement. findElement ждёт до 10 секунд (неявное ожидание), если элемент не появляется
+Только потом явное ожидание начинает считать свои 5 секунд. Итого: до 15 секунд ожидания
+# Когда можно использовать неявные ожидания (редкий случай):
+-Статические страницы — весь HTML загружается сразу
+-Нет AJAX, нет подгрузки контента
+-Элементы не появляются динамически после загрузки страницы
+
+Ожидания НЕ являются проверками, они используются для работы с элементами, ожидания — для «дождаться». Ассерты — для «проверить».
+Это не взаимозаменяемые вещи.
+1. Явное ожидание — ждём, пока элемент станет видимым
+wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("message")));
+2. Ассерт — проверяем текст
+assertEquals("Успешно", driver.findElement(By.id("message")).getText());
+
 Явные ожидания (WebDriverWait) - ожидания с указанием определенных условий, например видимость элемента либо его исчезновение.
  В отличии от неявного ожидания, которое объявляется  один раз - явные ожидания применяются конкретно к каждому элементу.
-
 WebDriverWait wait = new WebDriverWait(driver, Duration. ofSeconds(10));
 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("id")));
 # wait.until - переводится как - ждем пока ожидаемое условие(ExpectedConditions.) не будет выполнено -  и через точку пишем нужное условие, например .visibilityOfElementLocated
@@ -58,5 +77,26 @@ assertEquals(numberOfElements, 0, "Элемент присутствует на 
 //Возвращаем таймаут
 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
+
+https://www.selenium.dev/documentation/webdriver/waits/
+
+# Стратегии ожиданий в Selenium
+•Normal–стандартная стратегия, при которой Selenium ожидает полной загрузки страницы, включая все элементы, стили и скрипты,
+ прежде чем продолжить выполнение теста.
+•Eager–тест продолжает выполнение сразу после загрузки DOM, даже если внешние ресурсы (CSS, JavaScript, изображения) еще
+ не подгрузились. Позволяет ускорить тестирование, если взаимодействие с элементами возможно без полной загрузки страницы.
+•None–отключает ожидание загрузки страницы после выполнения навигационной команды. Seleniumсразу возвращает управление,
+ даже если загрузка еще продолжается. Используется в специфических сценариях, например, при тестировании одностраничных приложений (SPA) с динамической подгрузкой контента.
+https://www.selenium.dev/documentation/webdriver/drivers/options/#pageloadstrategy
+
+# Настройки браузера (Browser Options)в Selenium
+•setPlatformName–указывает операционную систему, на которой будет запущен браузер при удаленном выполнении тестов.
+•setBrowserVersion–позволяет задать конкретную версию браузера для запуска тестов.
+•setPageLoadStrategy–определяет стратегию загрузки страницы (Normal, Eager, None).
+•setAcceptInsecureCerts–активирует флаг, разрешающий работу с небезопасными SSL-сертификатами.
+•setPageLoadTimeout–устанавливает максимальное время ожидания полной загрузки страницы.
+•setScriptTimeout–определяет предельное время выполнения JavaScript-кода в браузере.
+•setImplicitWaitTimeout–задает время ожидания элементов при использовании неявных ожиданий (ImplicitWaits).
+https://www.selenium.dev/documentation/webdriver/drivers/options/
      */
 }

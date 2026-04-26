@@ -11,22 +11,27 @@ action.moveToElement(element)
       .perform();
 В конце цепочки обязательно нужен .perform() — он выполняет все накопленные действия, если .perform() не вызвать — действия не произойдут
 
+# Как работать: Создание объекта Actions
+Actions action = new Actions(driver);
+
  # Действия
+click() - клик
 doubleClick() - Двойной клик
 contextClick() - Клик правой кнопкой (контекстное меню)
+clickAndHold() - Удержание кнопки мыши
 moveToElement() - Наведение мыши на элемент
 dragAndDrop() - Перетаскивание (drag & drop)
 keyDown()/keyUp() - Зажатие клавиши, указывается в скобках (Ctrl, Shift), сначала нажимаем, а потом отжимаем
-clickAndHold() - Удержание кнопки мыши
+
+dragAndDrop(sourceElement, targetElement) - Перетаскивание элементов
+scrollToElement(element) - Скроллинг к элементу
+scrollByAmount(deltaX, deltaY) - Скроллинг по координатам
+#Работа с клавиатурой
+sendKeys(element, Keys.ENTER) -
+keyDown(Keys.CONTROL).click(element).keyUp(Keys.CONTROL).perform(); - Удержание Ctrl + клик
+sendKeys(Keys.ESCAPE) - Нажатие клавиши без привязки к элементу
 perform() - Обязательно — выполнить все накопленные действия
 
-# Как работать:
-Actions action = new Actions(driver);
-
-action.moveToElement(element).perform(); // Навести мышь на элемент
-action.doubleClick(element).perform(); // Двойной клик
-action.dragAndDrop(source, target).perform(); // Перетаскивание
-action.keyDown(Keys.CONTROL).click(element).keyUp(Keys.CONTROL).perform(); // Удержание Ctrl + клик
-
+https://www.selenium.dev/documentation/webdriver/actions_api/keyboard/
      */
 }

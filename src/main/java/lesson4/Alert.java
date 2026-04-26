@@ -7,6 +7,7 @@ public class Alert {
 -Alert нужно обязательно подтвердить или отклонить - наче тест зависнет
 -sendKeys() работает только для prompt - для alert() и confirm() не имеет смысла
 
+Alert alert = wait.until(ExpectedConditions.alertIsPresent()); //Ожидание появления алерта
 Alert alert = driver.switchTo().alert(); // Переключиться на Alert
 alert.accept(); // Нажать OK (подтвердить)
 alert.dismiss(); // Нажать Cancel (отклонить)
@@ -20,5 +21,6 @@ String actualText = alert.getText();
 assertEquals("Ожидаемый текст", actualText);
 alert.accept();
 
+https://www.selenium.dev/documentation/webdriver/interactions/alerts/
      */
 }
