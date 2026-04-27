@@ -13,7 +13,6 @@ alert.accept(); // Нажать OK (подтвердить)
 alert.dismiss(); // Нажать Cancel (отклонить)
 String text = alert.getText(); // Получить текст сообщения
 alert.sendKeys("текст"); // Ввести текст (только для prompt)
-alert.accept(); // После ввода нужно подтвердить
 
 # Пример проверки текста в Alert:
 Alert alert = driver.switchTo().alert();
