@@ -1,15 +1,16 @@
-package lesson4.pages;
+package lesson5.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
 
 public class ProductsPage extends BasePage {
 
-    private final By TITLE = By.cssSelector("[data-test=title]");  // 1 usage
+    private final By TITLE = By.cssSelector("[data-test='title']");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -20,6 +21,7 @@ public class ProductsPage extends BasePage {
     }
 
     public String getTitle() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
         return driver.findElement(TITLE).getText();
     }
 

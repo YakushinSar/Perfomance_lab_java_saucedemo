@@ -1,4 +1,4 @@
-package lesson4.pages;
+package lesson5.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
