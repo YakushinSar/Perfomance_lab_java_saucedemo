@@ -25,7 +25,7 @@ public class SuiteTestNG {
 
 //  это тестовые наборы, их может быть несколько
     <test name="Поток 1">
-//  тут запустятся только тесты помеченные include groups = "smoke", если include то кроме этих тестов
+//  тут запустятся только тесты помеченные "include" groups = "smoke", если "exclude" то кроме этих тестов
         <groups>
             <run>
                 <include name="smoke"/>
