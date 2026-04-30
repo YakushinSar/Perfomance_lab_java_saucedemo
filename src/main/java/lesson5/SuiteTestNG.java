@@ -102,8 +102,10 @@ public void setup(@Optional("chrome") String browser) {
 }
 
 Как запустить:
-1.Из IDEA - ПКМ на testng.xml → Run
-2.Из консоли - mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml, где
+1. Из IDEA:
+ПКМ на testng.xml → Run
+2. Из консоли:
+mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml, где
 - mvn clean test Очищает проект и запускает тесты
 - -Dsurefire.suiteXmlFiles=... Указывает Maven Surefire Plugin на файл testng.xml
 - src/test/resources/testng.xml это путь к файлу конфигурации TestNG в Maven-проекте
