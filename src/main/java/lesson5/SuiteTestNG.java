@@ -103,7 +103,7 @@ public void setup(@Optional("chrome") String browser) {
 
 Как запустить:
 1. Из IDEA:
-ПКМ на testng.xml → Run
+ПКМ на src/test/resources/testng.xml → Run
 2. Из консоли:
 mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml, где
 - mvn clean test Очищает проект и запускает тесты
