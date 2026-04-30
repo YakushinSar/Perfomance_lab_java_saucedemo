@@ -1,10 +1,11 @@
 package lesson5;
 
-public class iRetryAnalyzer {
+public class iRetryAnalyzerTestNG {
     /*
 1. Имплементируем интерфейс iRetryAnalyzer
 2. Имплементируем метод retry как нам заблагорассудится
 3. Используем объект iTestResult для получения информации о тесте
+
 public class Retry implements IRetryAnalyzer {
 
     private int attempt = 1;

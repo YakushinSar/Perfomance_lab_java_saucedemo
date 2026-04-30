@@ -74,7 +74,6 @@
 - `checkoutFormFieldsDisplayed()` — Поля `First Name`, `Last Name`, `Zip/Postal Code` отображаются.
 - `checkoutWithEmptyFieldsShowsError()` — Отображается ошибка, если обязательные поля не заполнены.
 - `successfulContinueAfterFillingForm()` — Успешный переход на следующий шаг после заполнения формы.
-- `cancelButtonReturnsToCart()` — Кнопка `Cancel` возвращает в корзину.
 
 ---
 
