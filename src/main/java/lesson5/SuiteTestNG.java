@@ -9,41 +9,41 @@ public class SuiteTestNG {
 - Group - группа тестов (тестовых наборов)
 - Suite - весь пакет тестов. По-сути .xml файл, созданный для TestNG
 
-Файлов с конфигрурацией TestNG xml file может быть больше количество для разных случаев. Они нужны для:
+# Файлов с конфигрурацией TestNG xml file может быть больше количество для разных случаев. Они нужны для:
 1. Разделение тестов на группы с возможностью запуска отдельно. Допустим: SmokeTest.xml,RegressionTest.xml
 2. Возможность запуска в параллели.
 3. Возможность запуска из командной строки.
 
+# Уровни параллелизации в TestNG
+parallel определяет, что именно будет запускаться параллельно. Возможные значения:
+
+Значение	            Что запускается параллельно	     Пример использования
+parallel="methods"	    Отдельные тестовые методы	     Когда методы не зависят друг от друга
+parallel="classes"	    Разные тестовые классы	         Разные классы тестов в одном <test>
+parallel="tests"	    Разные блоки <test>	             Кросс-браузерное тестирование
+parallel="instances"	Разные экземпляры классов	     При параметризованных тестах
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-//количество потоков
+<!-- thread-count количество параллельных потоков, если не указан, TestNG использует значение по умолчанию (5). Способ распараллеливания parallel (методы, классы, тесты) 5 сущностей -->
 <suite thread-count="2"
        name="Sauce demo"
-//     тип
-//распараллеливания parallel (методы, классы, тесты) 5 сущностей
        parallel="classes">
 
-//  это тестовые наборы, их может быть несколько
+    <!-- это тестовые наборы, их может быть несколько -->
     <test name="Поток 1">
-//  тут запустятся только тесты помеченные "include" groups = "smoke", если "exclude" то кроме этих тестов
+        <!-- тут запустятся только тесты помеченные группой "smoke" -->
         <groups>
             <run>
                 <include name="smoke"/>
             </run>
         </groups>
         <classes>
-//        сюда в кавычки ставятся тестовые классы которые надо запускать
-            <class name=""/>
-            <parameter name="password" value="password"></parameter>
-            <parameter name="email" value="test@mailinator.com"></parameter>
-        </classes>
-    </test>
-
-    <test name="Поток 1">
-        <classes>
-            <class name=""/>
+            <!-- сюда в кавычки ставятся тестовые классы которые надо запускать -->
             <class name=""/>
         </classes>
+        <parameter name="password" value="password"/>
+        <parameter name="email" value="test@mailinator.com"/>
     </test>
 </suite>
 
