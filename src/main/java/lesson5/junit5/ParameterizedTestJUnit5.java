@@ -1,4 +1,4 @@
-package lesson5TestNG.junit5;
+package lesson5.junit5;
 
 public class ParameterizedTestJUnit5 {
 

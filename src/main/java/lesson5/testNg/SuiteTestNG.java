@@ -1,4 +1,4 @@
-package lesson5TestNG.testNg;
+package lesson5.testNg;
 
 public class SuiteTestNG {
     /*

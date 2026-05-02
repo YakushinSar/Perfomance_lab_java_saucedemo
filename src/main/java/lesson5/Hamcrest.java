@@ -1,4 +1,4 @@
-package lesson5TestNG;
+package lesson5;
 
 public class Hamcrest {
     /*
