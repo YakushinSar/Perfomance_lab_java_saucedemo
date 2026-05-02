@@ -12,6 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>4.43.0</selenium.version>
     </properties>
 
     <dependencies>
@@ -19,7 +20,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.43.0</version>
+            <version>${selenium.version}</version>
             <scope>compile</scope>
         </dependency>
         <!-- JUnit 5 -->
@@ -51,7 +52,7 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- junit-jupiter-params - для параметризированных тестов на junit -->
+        <!-- junit-jupiter-params - для параметризированных тестов на junit, Эту зависимость можно УДАЛИТЬ, она уже входит в junit-jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -60,7 +61,7 @@
         </dependency>
     </dependencies>
 
-    <!-- Блок build с плагином -->
+    <!-- Блок build с плагинами -->
     <build>
         <plugins>
             <plugin>

@@ -1,9 +1,11 @@
-package lesson5TestNG.tests;
+package lesson6.tests;
 
+
+import lesson6.utils.Retry;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class LoginTest extends BaseTest {
 
