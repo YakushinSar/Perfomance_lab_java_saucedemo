@@ -4,23 +4,23 @@
        name="Sauce demo"
        parallel="classes">
 
-    <test name="Поток 1">
+    <test name="Хром">
         <groups>
             <run>
                 <include name="smoke"/>
             </run>
         </groups>
         <classes>
-            <class name="lesson5.tests.LoginTest"/>
-            <class name="lesson5.tests.BaseTest"/>
-            <parameter name="password" value="password"></parameter>
-            <parameter name="email" value="test@mailinator.com"></parameter>
+            <class name="lesson5TestNG.tests.LoginTest"/>
+            <class name="lesson5TestNG.tests.BaseTest"/>
+            <parameter name="browser" value="chrome"></parameter>
         </classes>
     </test>
 
-    <test name="Поток 2">
+    <test name="Файрфокс">
         <classes>
-            <class name="lesson5.tests.LoginTest"/>
+            <class name="lesson5TestNG.tests.LoginTest"/>
+            <parameter name="browser" value="firefox"></parameter>
         </classes>
     </test>
 </suite>

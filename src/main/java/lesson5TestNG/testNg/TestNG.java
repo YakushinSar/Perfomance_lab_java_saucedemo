@@ -1,4 +1,4 @@
-package lesson5;
+package lesson5TestNG.testNg;
 
 public class TestNG {
 
@@ -38,12 +38,16 @@ public void checkLoginWithPositiveCred() {
 - Или один тест заменит драйвер — и тесты “разъедутся”
 
 
-TestNG. Before and After
-@BeforeMethod & @AfterMethod
-@BeforeClass & @AfterClass
-@BeforeTest & @AfterTest
-@BeforeGroup & @AfterGroup
-@BeforeSuite & @AfterSuite
+# TestNG. Before and After
+@BeforeMethod & @AfterMethod → Перед / после каждого тестового метода
+@BeforeClass & @AfterClass → Один раз перед / после всех методов класса
+@BeforeTest & @AfterTest → Перед / после набора тестов (<test> в XML)
+@BeforeGroup & @AfterGroup → Перед / после выполнения группы (<groups> в XML)
+@BeforeSuite & @AfterSuite → Перед / после всего сьюта (XML)
+# Важно про alwaysRun
+@AfterMethod(alwaysRun = true) — метод выполнится, даже если тест упал или предыдущий @Before выбросил ошибку. Полезно для
+ закрытия драйвера, очистки ресурсов
+
 
      */
 }

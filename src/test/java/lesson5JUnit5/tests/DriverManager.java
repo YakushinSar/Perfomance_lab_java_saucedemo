@@ -1,4 +1,4 @@
-package lesson5.tests;
+package lesson5JUnit5.tests;
 
 import org.openqa.selenium.WebDriver;
 

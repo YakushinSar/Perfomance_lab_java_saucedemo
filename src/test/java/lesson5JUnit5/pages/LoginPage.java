@@ -1,4 +1,4 @@
-package lesson5.pages;
+package lesson5JUnit5.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,6 @@ public class LoginPage extends BasePage {
     //    Явные ожидания (WebDriverWait)
     public void isPageOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
-        // wait.until(ExpectedConditions.visibilityOf(driver.findElement(LOGIN_BUTTON)));
     }
 
     public void login(String user, String password) {
@@ -33,5 +32,9 @@ public class LoginPage extends BasePage {
 
     public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

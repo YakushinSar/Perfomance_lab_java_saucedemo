@@ -1,4 +1,4 @@
-package lesson5.tests;
+package lesson5TestNG.tests;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;

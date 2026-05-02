@@ -1,17 +1,18 @@
-package lesson5.tests;
+package lesson5JUnit5.tests;
 
 
-import lesson5.pages.LoginPage;
-import lesson5.pages.ProductsPage;
+import lesson5JUnit5.pages.LoginPage;
+import lesson5JUnit5.pages.ProductsPage;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 
 import java.util.HashMap;
 
+@ExtendWith(CustomTestWatcher.class) // <-- Регистрируем TestWatcher
 public class BaseTest {
 
     // ✅ Сделать ThreadLocal
@@ -27,8 +28,8 @@ public class BaseTest {
         return productsPageLocal.get();
     }
 
-    @Parameters({"browser"})
-    @BeforeMethod(alwaysRun = true)
+
+    @BeforeEach
     public void setup() {
         ChromeOptions options = new ChromeOptions();
         HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -49,7 +50,7 @@ public class BaseTest {
     }
 
     //    Выполнить после каждого теста, выполнить ДАЖЕ если тест упал/пропущен
-    @AfterMethod(alwaysRun = true)
+    @AfterEach
     public void tearDown() {
         DriverManager.quitDriver();
         // ✅ Очищаем ThreadLocal после теста

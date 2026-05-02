@@ -1,4 +1,4 @@
-package lesson5.pages;
+package lesson5TestNG.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
