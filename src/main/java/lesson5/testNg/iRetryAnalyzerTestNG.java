@@ -36,21 +36,23 @@ public void dependsOn() {
     throw new NullPointerException();
 }
 
-# Как реализовать подключение Retry через TestNG.xml файл
+# Как реализовать подключение Retry через TestNG.xml файл - через глобальный Retry через TestNG.xml (IAnnotationTransformer)
 https://swtestacademy.com/retry-failed-tests-testng-iretryanalyzer/
-
-#  Можно указать это в TestNG xml файл чтобы iRetryAnalyzer применялся при запуске
-Сначала добавляем класс в BaseTest
+1. Создать класс AnnotationTransformer в том же пакете. Этот класс будет динамически добавлять Retry ко всем тестам во время выполнения.
 public class AnnotationTransformer implements IAnnotationTransformer {
     @Override
-    public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
+    public void transform(ITestAnnotation annotation, Class testClass,Constructor testConstructor, Method testMethod) {
+        // Устанавливаем Retry анализатор для каждого тестового метода
         annotation.setRetryAnalyzer(Retry.class);
     }
 }
-В TestNG xml файл прокинуть  iRetryAnalyzer в теги Listener
-<listeners>
-        <listener class-name="retrysingletest.Listener"/>
-        <listener class-name="retrysingletest.AnnotationTransformer"/>
+
+2. Добавить слушатель в основной testng.xml файл конфигурации который будет использоваться. Добавить в  секцию <listeners>.
+    <!-- !!! СЮДА ДОБАВИТЬ СЛУШАТЕЛЯ !!! -->
+    <listeners>
+        <listener class-name="homework5_TestNG.tests.AnnotationTransformer"/>
     </listeners>
+
+3. Аннотации @Test(retryAnalyzer = Retry.class) над классами/методами можно убрать.
      */
 }
