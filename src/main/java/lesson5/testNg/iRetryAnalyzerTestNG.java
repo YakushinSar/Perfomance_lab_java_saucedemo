@@ -30,11 +30,14 @@ public class Retry implements IRetryAnalyzer {
         return false;
     }
 }
-4. Используем параметр retryAnalyzer для подключения класса к методу
+# Способы подключения Retry (итоговая таблица)
+1. Над методом — только для одного теста
 @Test(retryAnalyzer = Retry.class)
-public void dependsOn() {
-    throw new NullPointerException();
-}
+public void test1() { }
+2. Над классом — для всех тестов класса
+@Test(retryAnalyzer = Retry.class)
+public class LoginTest { }
+3. Глобально (через IAnnotationTransformer + testng.xml) — для всех тестов проекта
 
 # Как реализовать подключение Retry через TestNG.xml файл - через глобальный Retry через TestNG.xml (IAnnotationTransformer)
 https://swtestacademy.com/retry-failed-tests-testng-iretryanalyzer/
@@ -46,13 +49,11 @@ public class AnnotationTransformer implements IAnnotationTransformer {
         annotation.setRetryAnalyzer(Retry.class);
     }
 }
-
 2. Добавить слушатель в основной testng.xml файл конфигурации который будет использоваться. Добавить в  секцию <listeners>.
     <!-- !!! СЮДА ДОБАВИТЬ СЛУШАТЕЛЯ !!! -->
     <listeners>
         <listener class-name="homework5_TestNG.tests.AnnotationTransformer"/>
     </listeners>
-
 3. Аннотации @Test(retryAnalyzer = Retry.class) над классами/методами можно убрать.
      */
 }
