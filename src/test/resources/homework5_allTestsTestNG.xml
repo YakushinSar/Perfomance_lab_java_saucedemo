@@ -2,9 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Homework Tests">
 
-    <!-- !!! СЮДА ДОБАВИТЬ СЛУШАТЕЛЯ !!! -->
+    <!-- Слушатели -->
     <listeners>
+        <!-- Для глобального ретрая (IRetryAnalyzer) -->
         <listener class-name="homework5_TestNG.tests.AnnotationTransformer"/>
+
+        <!-- Для логирования тестов (ITestListener) -->
+        <listener class-name="homework5_TestNG.tests.TestListener"/>
     </listeners>
 
     <test name="Homework5 Tests">
