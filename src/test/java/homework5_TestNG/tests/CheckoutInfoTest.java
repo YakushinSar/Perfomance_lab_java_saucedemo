@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+@Test(retryAnalyzer = Retry.class)
 public class CheckoutInfoTest extends BaseTest {
 
     //предусловие для попадания на страницу CheckoutInfoPage

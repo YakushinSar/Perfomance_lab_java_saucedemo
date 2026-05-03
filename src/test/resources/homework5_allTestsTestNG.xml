@@ -2,6 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Homework Tests">
 
+    <!-- !!! СЮДА ДОБАВИТЬ СЛУШАТЕЛЯ !!! -->
+    <listeners>
+        <listener class-name="homework5_TestNG.tests.AnnotationTransformer"/>
+    </listeners>
+
     <test name="Homework5 Tests">
         <packages>
             <package name="homework5_TestNG.tests"/>

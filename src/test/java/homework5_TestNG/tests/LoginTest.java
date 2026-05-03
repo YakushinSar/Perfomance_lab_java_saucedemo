@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+@Test(retryAnalyzer = Retry.class)
 public class LoginTest extends BaseTest {
 
     @Test(description = "Проверка входа в систему с валидными данными",

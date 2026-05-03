@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
+@Test(retryAnalyzer = Retry.class)
 public class ProductsTest extends BaseTest {
 
     //предусловие для попадания на страницу CartPage
