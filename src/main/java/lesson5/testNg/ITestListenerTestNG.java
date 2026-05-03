@@ -18,7 +18,7 @@ onTestFailure срабатывает если тест упал
 onTestSkipped срабатывает если тест пропущен
 onStart/onFinish срабатывает до/после всех тестов
 
-
+# 1. Создать файл TestListener в пакете проекта.tests
 public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -52,11 +52,16 @@ public class TestListener implements ITestListener {
     }
 }
 
-# Можно указать это в TestNG xml файл чтобы ITestListener применялся при запуске
-    <listeners>
-        <listener class-name="lesson5.tests.TestListener"/>
-    </listeners>
-
+# Как подключить:
+Способ 1: Через @Listeners в BaseTest:
+@Listeners(TestListener.class)
+public class BaseTest {
+    // ...
+}
+Способ 2: Через  TestNG xml файл чтобы ITestListener применялся при запуске
+  <listeners>
+    <listener class-name="homework5_TestNG.tests.TestListener"/>
+</listeners>
 
      */
 }
