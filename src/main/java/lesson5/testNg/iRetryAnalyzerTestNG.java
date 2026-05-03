@@ -17,7 +17,9 @@ public class Retry implements IRetryAnalyzer {
             if (attempt < MAX_RETRY) {
                 attempt++;
                 iTestResult.setStatus(ITestResult.FAILURE);
-                System.out.println("Retrying once again");
+                // При перезапуске теста в консоль выведется:
+                    System.out.println("Повторная попытка запуска");
+                // Это помогает отслеживать, сколько раз тест перезапускался
                 return true;
             } else {
                 iTestResult.setStatus(ITestResult.FAILURE);
