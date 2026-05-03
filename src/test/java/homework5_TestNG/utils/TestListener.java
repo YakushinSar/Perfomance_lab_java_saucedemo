@@ -1,4 +1,4 @@
-package homework5_TestNG.tests;
+package homework5_TestNG.utils;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;

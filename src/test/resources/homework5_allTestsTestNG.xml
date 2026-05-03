@@ -5,10 +5,10 @@
     <!-- Слушатели -->
     <listeners>
         <!-- Для глобального ретрая (IRetryAnalyzer) -->
-        <listener class-name="homework5_TestNG.tests.AnnotationTransformer"/>
+        <listener class-name="homework5_TestNG.utils.AnnotationTransformer"/>
 
         <!-- Для логирования тестов (ITestListener) -->
-        <listener class-name="homework5_TestNG.tests.TestListener"/>
+        <listener class-name="homework5_TestNG.utils.TestListener"/>
     </listeners>
 
     <test name="Homework5 Tests">
