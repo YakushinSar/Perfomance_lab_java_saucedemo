@@ -4,10 +4,11 @@ public class JUnit5 {
     /*
 JUnit5 - делает все тоже самое что и TestNG.
 # Зависимость в pom.xml (указана корректно)
+<!-- JUnit 5 (API + Engine + Params) -->
 <dependency>
     <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-params</artifactId>
-    <version>6.0.3</version>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.11.0</version>
     <scope>test</scope>
 </dependency>
 

@@ -3,6 +3,9 @@ package lesson5.junit5;
 public class ParallelTestJUnit5 {
     /*
 Параллельный запуск. В папке resourses cоздать файл junit-platform.properties и в нем настроить параллельный запуск.
+Пример:
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
 
 junit.jupiter.execution.parallel.enabled = true // означает что тесты можно запускать параллельно.
 junit.jupiter.execution.parallel.mode.default = concurrent // можно параллелить методы, concurrent - параллельно, same_thread - последовательно
