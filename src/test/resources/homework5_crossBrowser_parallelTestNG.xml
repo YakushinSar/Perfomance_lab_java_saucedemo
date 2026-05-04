@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cross Browser Tests" parallel="tests" thread-count="2">
+    <test name="Chrome">
+        <parameter name="browser" value="chrome"/>
+        <packages>
+            <package name="homework5_TestNG.tests"/>
+        </packages>
+    </test>
+    <test name="Edge">
+        <parameter name="browser" value="edge"/>
+        <packages>
+            <package name="homework5_TestNG.tests"/>
+        </packages>
+    </test>
+</suite>
