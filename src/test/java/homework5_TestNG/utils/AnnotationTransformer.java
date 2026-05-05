@@ -14,6 +14,11 @@ public class AnnotationTransformer implements IAnnotationTransformer {
             return;
         }
 
+        // Диагностическая строка System.out.println,  нужна только для диагностики. После настройки её можно удалить или
+        // закомментировать Она помогает убедиться, что: AnnotationTransformer вообще вызывается, он вызывается именно для
+        // нужных тестовых методов (которые упали)
+        // System.out.println("✅ AnnotationTransformer вызван для: " + testMethod.getName());
+
         // Устанавливаем Retry анализатор для каждого тестового метода, Способы подключения Retry по (итоговая таблица которая выше)
         annotation.setRetryAnalyzer(Retry.class);
     }
