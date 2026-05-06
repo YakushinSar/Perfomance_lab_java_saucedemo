@@ -18,10 +18,25 @@
         <testng.version>7.12.0</testng.version>
         <assertj.version>3.27.7</assertj.version>
         <hamcrest.version>2.2</hamcrest.version>
+        <allure.version>2.17.0</allure.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
 
         <!-- Версии плагинов -->
         <surefire.version>3.5.4</surefire.version>
     </properties>
+
+    <dependencyManagement>
+        <!-- Для автоматической синхронизации всех Allure-зависимостей -->
+        <dependencies>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-bom</artifactId>
+                <version>${allure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Selenium -->
@@ -67,15 +82,38 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- allure — для генерации отчетов -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <!-- aspectj — чтобы Allure "видел" выполнение тестов и добавлял в отчёт шаги и вложения. -->
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
     </dependencies>
 
     <!-- Блок build с плагинами -->
     <build>
         <plugins>
             <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.version}</version>
+            </plugin>
+            <!-- Настраиваем плагин запуска тестов -->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
             </plugin>
         </plugins>
     </build>
