@@ -1,5 +1,6 @@
 package homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие страницы Products")
     public void openPage() {
         driver.get(BASE_URL + "/inventory.html");
     }
@@ -35,6 +37,7 @@ public class ProductsPage extends BasePage {
     }
 
     // 2. Нажать Add to cart на товаре по индексу
+    @Step("Нажатие на кнопку  Add")
     public void clickAddToCartButton(int index) {
         List<WebElement> buttons = driver.findElements(ADD_TO_CART_BUTTON);
         buttons.get(index).click();
@@ -51,12 +54,14 @@ public class ProductsPage extends BasePage {
     }
 
     // 4. Сортировка A → Z
+    @Step("Сортировка A → Z")
     public void sortProductsByNameAZ() {
         Select sortSelect = new Select(driver.findElement(SORT_DROPDOWN));
         sortSelect.selectByValue("az");
     }
 
     // 5. Сортировка Z → A
+    @Step("Сортировка Z → A")
     public void sortProductsByNameZA() {
         Select sortSelect = new Select(driver.findElement(SORT_DROPDOWN));
         sortSelect.selectByValue("za");
@@ -73,6 +78,7 @@ public class ProductsPage extends BasePage {
     }
 
     // 8. Кликнуть на иконку корзины
+    @Step("Клик на иконку корзины")
     public void clickCartBadge() {
         driver.findElement(By.className("shopping_cart_link")).click();
     }

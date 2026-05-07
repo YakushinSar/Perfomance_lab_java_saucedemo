@@ -1,6 +1,7 @@
 package homework7.tests;
 
 import homework7.utils.Retry;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -17,6 +18,12 @@ public class ProductsTest extends BaseTest {
     @Test(description = "Проверка, что список товаров отображается на странице",
             testName = "Список товаров",
             priority = 1)
+    @Description("Проверка, что список товаров отображается на странице")
+    @Feature("Product in SauseDemo")
+    @Story("Список товаров")
+    @TmsLink("ID-3")
+    @Issue("ID-3")
+    @Owner("Якушин")
     public void productsListDisplayed() {
         transitionToProductPage();
 
@@ -26,6 +33,12 @@ public class ProductsTest extends BaseTest {
     @Test(description = "Проверка, что кнопка Add to cart добавляет товар в корзину",
             testName = "Добавление в корзину",
             priority = 2)
+    @Description("Проверка, что кнопка Add to cart добавляет товар в корзину")
+    @Feature("Product in SauseDemo")
+    @Story("Добавление в корзину")
+    @TmsLink("ID-4")
+    @Issue("ID-4")
+    @Owner("Якушин")
     public void addToCartButtonAddsProduct() {
         transitionToProductPage();
         productsPage.clickAddToCartButton(0);
@@ -36,6 +49,12 @@ public class ProductsTest extends BaseTest {
     @Test(description = "Проверка, что сортировка товаров работает корректно",
             testName = "Сортировка товаров",
             priority = 3)
+    @Description("Проверка, что сортировка товаров работает корректно")
+    @Feature("Product in SauseDemo")
+    @Story("Сортировка товаров")
+    @TmsLink("ID-5")
+    @Issue("ID-5")
+    @Owner("Якушин")
     public void productSortingWorks() {
         transitionToProductPage();
         //сортировка A → Z (по умолчанию)

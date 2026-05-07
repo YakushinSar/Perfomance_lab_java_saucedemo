@@ -1,6 +1,7 @@
 package homework7.tests;
 
 import homework7.utils.Retry;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -25,6 +26,12 @@ public class CheckoutCompleteTest extends BaseTest {
     @Test(description = "Проверка, что отображается сообщение об успешном заказе",
             testName = "Сообщение об успехе",
             priority = 1)
+    @Description("Проверка, что отображается сообщение об успешном заказе")
+    @Feature("CheckoutComplete in SauseDemo")
+    @Story("Сообщение об успехе")
+    @TmsLink("ID-15")
+    @Issue("ID-15")
+    @Owner("Якушин")
     public void successMessageDisplayed() {
         addCheckoutOverviewToCheckoutComplete();
         String actualMessage = checkoutCompletePage.getSuccessMessage();
@@ -35,6 +42,12 @@ public class CheckoutCompleteTest extends BaseTest {
     @Test(description = "Проверка, что кнопка Back Home возвращает в каталог",
             testName = "Возврат в каталог",
             priority = 2)
+    @Description("Проверка, что кнопка Back Home возвращает в каталог")
+    @Feature("CheckoutComplete in SauseDemo")
+    @Story("Возврат в каталог товаров")
+    @TmsLink("ID-16")
+    @Issue("ID-16")
+    @Owner("Якушин")
     public void backHomeButtonReturnsToCatalog() {
         addCheckoutOverviewToCheckoutComplete();
         checkoutCompletePage.clickBackHomeButton();

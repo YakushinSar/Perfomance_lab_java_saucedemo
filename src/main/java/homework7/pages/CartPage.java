@@ -1,5 +1,6 @@
 package homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие страницы CartPage")
     public void openPage() {
         driver.get(BASE_URL + "/cart.html");
     }
@@ -30,6 +32,7 @@ public class CartPage extends BasePage {
     }
 
     // Удаление товара из корзины
+    @Step("Удаление товара из корзины")
     public void removeFirstItem() {
         driver.findElement(REMOVE_BUTTON).click();
     }
@@ -51,21 +54,25 @@ public class CartPage extends BasePage {
     }
 
     // Переход назад в каталог
+    @Step("Клик на Продолжить покупку")
     public void backToCatalog() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
     // вернулись на страницу товаров
+    @Step("Возврат на страницу товаров")
     public boolean isOnProductsPage() {
         return driver.getCurrentUrl().contains("inventory.html");
     }
 
     // Переход к оформлению заказа
+    @Step("Переход на  CheckoutInfoPage")
     public void proceedToCheckout() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
-    //    клик на кнопку Checkout
+    //    Клик на кнопку Checkout
+    @Step("Клик на кнопку Checkout")
     public void clickCheckoutButton() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }

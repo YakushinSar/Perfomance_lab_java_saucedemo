@@ -1,6 +1,7 @@
 package homework7.tests;
 
 import homework7.pages.*;
+import io.qameta.allure.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,6 +25,7 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)
+    @Description("Настройка браузера")
     public void setup(@Optional("chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
@@ -53,6 +55,7 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
+    @Description("Закрытие браузера")
     public void tearDown() {
         if (driver != null) {
             driver.quit();

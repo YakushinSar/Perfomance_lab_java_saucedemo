@@ -1,5 +1,6 @@
 package homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -14,10 +15,12 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открытие страницы Login")
     public void openPage() {
         driver.get(BASE_URL);
     }
 
+    @Step("Вход в магазин с данными : логин '{user}', пароль '{password}'")
     public void login(String username, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(username);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);

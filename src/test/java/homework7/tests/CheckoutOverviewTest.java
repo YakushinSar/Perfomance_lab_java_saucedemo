@@ -1,6 +1,7 @@
 package homework7.tests;
 
 import homework7.utils.Retry;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -22,6 +23,12 @@ public class CheckoutOverviewTest extends BaseTest {
 
     @Test(description = "Проверка, что кнопка Finish завершает заказ",
             testName = "Завершение заказа")
+    @Description("Проверка, что кнопка Finish завершает заказ")
+    @Feature("CheckoutOverview in SauseDemo")
+    @Story("Завершение заказа")
+    @TmsLink("ID-14")
+    @Issue("ID-14")
+    @Owner("Якушин")
     public void finishButtonCompletesOrder() {
         addCheckoutInfoToCheckoutOverview();
         checkoutOverviewPage.clickFinishButton();

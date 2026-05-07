@@ -1,6 +1,7 @@
 package homework7.tests;
 
 import homework7.utils.Retry;
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -20,8 +21,14 @@ public class CheckoutInfoTest extends BaseTest {
     }
 
     @Test(description = "Проверка, что форма оформления заказа открывается",
-            testName = "Открытие формы",
+            testName = "Открытие формы заказа",
             priority = 1)
+    @Description("Проверка, что форма оформления заказа открывается")
+    @Feature("CheckoutInfo in SauseDemo")
+    @Story("Открытие формы заказа")
+    @TmsLink("ID-10")
+    @Issue("ID-10")
+    @Owner("Якушин")
     public void checkoutFormOpens() {
         addCartToCheckoutInfo();
 
@@ -31,6 +38,12 @@ public class CheckoutInfoTest extends BaseTest {
     @Test(description = "Проверка, что поля формы отображаются",
             testName = "Поля формы",
             priority = 2)
+    @Description("Проверка, что поля формы отображаются")
+    @Feature("CheckoutInfo in SauseDemo")
+    @Story("Проверка полей формы")
+    @TmsLink("ID-11")
+    @Issue("ID-11")
+    @Owner("Якушин")
     public void checkoutFormFieldsDisplayed() {
         addCartToCheckoutInfo();
 
@@ -50,6 +63,12 @@ public class CheckoutInfoTest extends BaseTest {
             description = "Проверка, что при пустых полях отображается соответствующая ошибка",
             testName = "Ошибка валидации, параметризированный",
             priority = 3)
+    @Description("Проверка, что при пустых полях отображается соответствующая ошибка")
+    @Feature("CheckoutInfo in SauseDemo")
+    @Story("При пустых полях отображается соответствующая ошибка")
+    @TmsLink("ID-12")
+    @Issue("ID-12")
+    @Owner("Якушин")
     public void newTest(String firstName, String lastName, String postalCode, String expectedError) {
         addCartToCheckoutInfo();
         checkoutInfoPage.addData(firstName, lastName, postalCode);
@@ -61,6 +80,12 @@ public class CheckoutInfoTest extends BaseTest {
     @Test(description = "Проверка, что после заполнения формы происходит переход на следующий шаг",
             testName = "Переход на следующий шаг",
             priority = 4)
+    @Description("Проверка, что после заполнения формы происходит переход на следующий шаг")
+    @Feature("CheckoutInfo in SauseDemo")
+    @Story("Переход на CheckoutOverview")
+    @TmsLink("ID-13")
+    @Issue("ID-13")
+    @Owner("Якушин")
     public void successfulContinueAfterFillingForm() {
         addCartToCheckoutInfo();
         checkoutInfoPage.addData("Ivanov", "Ivan", "12345");

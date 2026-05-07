@@ -1,5 +1,6 @@
 package homework7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +19,7 @@ public class CheckoutInfoPage extends BasePage {
         super(driver);
     }
 
+    @Step("Заполнение формы: имя '{firstName}', фамилия '{lastName}', индекс '{postalCode}'")
     public void addData(String firstName, String lastName, String postalCode) {
         WebElement firstNameField = driver.findElement(FIRSTNAME_FIELD);
         WebElement lastNameField = driver.findElement(LASTNAME_FIELD);
@@ -44,6 +46,7 @@ public class CheckoutInfoPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_MESSAGE)).getText();
     }
 
+    @Step("Нажатие на кнопку Continue")
     public void clickContinueButton() {
         driver.findElement(CONTINUE_BUTTON).click();
     }
