@@ -132,8 +132,12 @@ allure serve
 7. Packages - группировка тестов по Java-пакетам, в которых лежат тестовые классы.
 
 # Разметка тестов: Allure-аннотации позволяют сделать отчёт информативным: шаги, описание, ссылки на задачи и вложения.
+ Аннтотации должны быть аллюровскими, пишутся друг над другом, не группируются.
 - @Description -> Подробное описание теста
-- @Step -> Шаг теста (с поддержкой параметров)
+- @Step -> Шаг теста. Чаще всего ставят в Page Object, чтобы в Allure-отчёте было понятно, какие действия выполнял пользователь
+ на странице. В тестах @Step используют реже — только для логики самого теста. @Step в Page Object помечают только те методы,
+ которые имитируют действия пользователя. Не нужно вешать @Step на каждый метод - геттеры, проверки, ожидания и вспомогательные
+ методы — не помечают.
 - @Epic -> Крупная бизнес-функция (масштабный блок)
 - @Feature -> Конкретная функция внутри Epic
 - @Story -> Сценарий использования внутри Feature
@@ -179,14 +183,23 @@ public class AllureUtils {
 
 Чтобы скриншот делался при падении автоматически, можно добавить в TestListener в пункт отвечающий за падение
 @Override
-public void onTestFailure(ITestResult result) {
-    System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n",
-            result.getName(), getExecutionTime(result));
-    // Скриншот при падении
-    AllureUtils.takeScreenshot(DriverManager.getDriver());
+    public void onTestFailure(ITestResult iTestResult) {
+        System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n",
+                iTestResult.getName(), getExecutionTime(iTestResult));
+
+        // Скриншот при падении, тут объявляется драйвер, который будет находится в контексте прохождения тестов
+        WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
+        if (driver != null) {
+            AllureUtils.takeScreenshot(driver);
+        }
+    }
+В BaseTest.setup(), в @BeforeMethod перед тем как будет проходить конкретный тест передать в контекст драйвер
+public void setup(@Optional("chrome") String browser, ITestContext iTestContext){
+iTestContext.setAttribute("driver", driver);
 }
-В BaseTest надо добавить аннотацию @Listeners({AllureTestNg.class,TestListener.class}) чтобы условие прописанное в TestListener
- применялось ко всем тестам.
+
+В BaseTest добавляем @Listeners({AllureTestNg.class, TestListener.class}) над ВСЕМ классом BaseTest чтобы условие прописанное
+ в TestListener применялось ко всем тестам.
 
      */
 }

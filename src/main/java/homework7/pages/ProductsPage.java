@@ -16,6 +16,7 @@ public class ProductsPage extends BasePage {
     private final By CART_BADGE = By.className("shopping_cart_badge");
     private final By SORT_DROPDOWN = By.className("product_sort_container");
     private final By PRODUCT_NAMES = By.className("inventory_item_name");
+    private final String ADD_TO_CART_PATTERN = "//*[text()='%s']/ancestor::div[@class='inventory_item']//button[text()='Add to cart']";
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -42,6 +43,22 @@ public class ProductsPage extends BasePage {
         List<WebElement> buttons = driver.findElements(ADD_TO_CART_BUTTON);
         buttons.get(index).click();
     }
+
+    // новый!!! метод добавляющий товар в корзину в зависимости от названия товара, привязываемся к названию товара
+    //  String.format это метод, позволяющий вместо переменной подставлять любое значение вместо %s.
+    public void addToCartNew(String productName) {
+        driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, productName))).click();
+    }
+    /*
+    Использование метода в тесте
+    public void checkLoginWithEmptyPassword() {
+        LoginPage.open();
+        LoginPage.isPageOpened();
+        loginPage.login("standard_user", "secret_sauce");
+        productsPage.addToCart("Test.allTheThings() T-Shirt (Red)"); //"Test.allTheThings() T-Shirt (Red)" это название товара с фронта
+    }
+         */
+
 
     // 3. Получить количество товаров в корзине
     public int getCartItemCount() {

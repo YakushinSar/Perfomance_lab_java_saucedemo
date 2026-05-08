@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Homework7 Tests">
+
+    <!-- Слушатели -->
+    <listeners>
+        <!-- Для глобального ретрая (IRetryAnalyzer) -->
+        <listener class-name="homework7.utils.AnnotationTransformer"/>
+
+        <!-- Для логирования тестов (ITestListener) -->
+        <listener class-name="homework7.utils.TestListener"/>
+    </listeners>
+
+    <test name="Homework7 allTests">
+        <packages>
+            <package name="homework7.tests"/>
+        </packages>
+    </test>
+
+</suite>

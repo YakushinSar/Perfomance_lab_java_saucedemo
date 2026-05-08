@@ -46,6 +46,21 @@ public class ProductsTest extends BaseTest {
         assertEquals(cartCount, 1);
     }
 
+    @Test(description = "Проверка, что кнопка Add to cart добавляет товар в корзину по имени товара",
+            testName = "Добавление в корзину",
+            priority = 2)
+    @Description("Проверка, что кнопка Add to cart добавляет товар в корзину по имени товара")
+    @Feature("Product in SauseDemo")
+    @Story("Добавление в корзину")
+    @TmsLink("ID-4_1")
+    @Issue("ID-4_1")
+    @Owner("Якушин")
+    public void addToCartButtonAddsProductNew() {
+        transitionToProductPage();
+        productsPage.addToCartNew("Test.allTheThings() T-Shirt (Red)"); //"Test.allTheThings() T-Shirt (Red)" это название товара с фронта
+    }
+
+
     @Test(description = "Проверка, что сортировка товаров работает корректно",
             testName = "Сортировка товаров",
             priority = 3)
