@@ -197,9 +197,25 @@ public class AllureUtils {
 public void setup(@Optional("chrome") String browser, ITestContext iTestContext){
 iTestContext.setAttribute("driver", driver);
 }
-
 В BaseTest добавляем @Listeners({AllureTestNg.class, TestListener.class}) над ВСЕМ классом BaseTest чтобы условие прописанное
  в TestListener применялось ко всем тестам.
+
+# Запуск тестов для повседневной работы:
+# Самый чистый вариант (рекомендую)
+mvn clean  -> запуск тестов -> allure serve
+# Подробнее:
+# 1. mvn clean — не обязательно, но полезно
+- Удаляет папку target (включая старые allure-results)
+- Для однократного прогона — не критично
+- Для серии запусков — лучше делать clean
+
+# 2. Полный цикл (рекомендуемый)
+mvn clean test       очистка + запуск тестов
+allure serve         показать отчёт
+
+# 3. Без clean (если нужно сохранить историю)
+mvn test             новые результаты добавятся к старым
+allure serve         отчёт покажет всё вместе
 
      */
 }

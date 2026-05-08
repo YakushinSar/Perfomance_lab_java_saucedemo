@@ -44,7 +44,7 @@ public class ProductsPage extends BasePage {
         buttons.get(index).click();
     }
 
-    // новый!!! метод добавляющий товар в корзину в зависимости от названия товара, привязываемся к названию товара
+    // новый метод!!! добавляющий товар в корзину в зависимости от названия товара, привязываемся к названию товара
     //  String.format это метод, позволяющий вместо переменной подставлять любое значение вместо %s.
     public void addToCartNew(String productName) {
         driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, productName))).click();

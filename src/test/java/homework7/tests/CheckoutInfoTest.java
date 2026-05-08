@@ -91,6 +91,8 @@ public class CheckoutInfoTest extends BaseTest {
         checkoutInfoPage.addData("Ivanov", "Ivan", "12345");
         checkoutInfoPage.clickContinueButton();
 
+//        тут специально указано неверный "1Checkout: Overview" вместо "Checkout: Overview", чтобы проверить появление в allure
+//        скриншота при падении как указано в условии TestListener
         assertEquals(checkoutOverviewPage.getTitle(), "1Checkout: Overview");
     }
 }
