@@ -91,6 +91,6 @@ public class CheckoutInfoTest extends BaseTest {
         checkoutInfoPage.addData("Ivanov", "Ivan", "12345");
         checkoutInfoPage.clickContinueButton();
 
-        assertEquals(checkoutOverviewPage.getTitle(), "Checkout: Overview");
+        assertEquals(checkoutOverviewPage.getTitle(), "1Checkout: Overview");
     }
 }
