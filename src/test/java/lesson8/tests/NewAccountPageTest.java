@@ -15,7 +15,7 @@ public class NewAccountPageTest extends BaseTest {
         driver.get("https://demo.suiteondemand.com/index.php?module=Accounts&action=EditView&return_module=Accounts&return_action=DetailView");
 
         sleep(2000);
-        newAccountPage.addNewAccount("test", "+123456", "+1234567", "avito.ru", "test", "Investor", "Banking");
+        newAccountPage.addNewAccount("lesson9/test", "+123456", "+1234567", "avito.ru", "lesson9/test", "Investor", "Banking");
         newAccountPage.clickSave();  // вызов метода сохранения
         sleep(2000);
     }

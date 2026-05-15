@@ -24,7 +24,7 @@ public class AccountTest extends BaseTest {
 
 //        проверка инпутов
         sleep(1000);
-        new Input(driver, "Name").write("test");
+        new Input(driver, "Name").write("lesson9/test");
         sleep(1000);
         new Input(driver, "Office Phone").write("12345");
         sleep(1000);
@@ -34,9 +34,9 @@ public class AccountTest extends BaseTest {
         sleep(1000);
 
 //        проверка текстареа
-        new AdressTextArea(driver, "Billing Address", "Street").write("test");
+        new AdressTextArea(driver, "Billing Address", "Street").write("lesson9/test");
         sleep(1000);
-        new AdressTextArea(driver, "Shipping Address", "Street").write("test");
+        new AdressTextArea(driver, "Shipping Address", "Street").write("lesson9/test");
         sleep(1000);
 
 //      работа с выпадающим списком

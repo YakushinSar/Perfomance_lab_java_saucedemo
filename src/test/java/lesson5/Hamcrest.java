@@ -31,10 +31,10 @@ public class Hamcrest {
         assertThat(actualDouble, not(equalTo(0.0)));
 
         // Пример проверки объектов
-        Object actualObject = "test";
+        Object actualObject = "lesson9/test";
         assertThat(actualObject, notNullValue());
         assertThat(actualObject, instanceOf(String.class));
-        assertThat(actualObject, is("test"));
+        assertThat(actualObject, is("lesson9/test"));
 
         // Пример проверки списков (коллекций)
         List<String> actualList = Arrays.asList("one", "two", "three");

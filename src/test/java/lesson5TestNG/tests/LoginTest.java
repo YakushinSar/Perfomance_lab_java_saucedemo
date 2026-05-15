@@ -47,7 +47,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithNegativeCred() {
         getLoginPage().open();
         getLoginPage().isPageOpened();
-        getLoginPage().login("test", "test");
+        getLoginPage().login("lesson9/test", "lesson9/test");
         assertEquals(getLoginPage().getErrorMessage(), "Epic sadface: Username and password do not match any user in" +
                 " this service");
     }
@@ -69,7 +69,7 @@ public class LoginTest extends BaseTest {
         return new Object[][]{
                 {"", "secret_sauce", "Epic sadface: Username is required"},
                 {"standard_user", "", "Epic sadface: Password is required"},
-                {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
+                {"lesson9/test", "lesson9/test", "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 

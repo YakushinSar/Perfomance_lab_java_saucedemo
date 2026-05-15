@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithNegativeCred() {
         loginPage.open();
         loginPage.isPageOpened();
-        loginPage.login("test", "test");
+        loginPage.login("lesson9/test", "lesson9/test");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in" +
                 " this service");
     }

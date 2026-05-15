@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
         return new Object[][]{
                 {"standard_user", "", "Epic sadface: Password is required"},
                 {"", "secret_sauce", "Epic sadface: Username is required"},
-                {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
+                {"lesson9/test", "lesson9/test", "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 

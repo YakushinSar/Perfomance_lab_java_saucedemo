@@ -33,11 +33,11 @@ public class AssertJ {
                 .isNotZero();
 
         // Пример проверки объектов
-        Object actualObject = "test";
+        Object actualObject = "lesson9/test";
         Assertions.assertThat(actualObject)
                 .isNotNull()
                 .isInstanceOf(String.class)
-                .isEqualTo("test");
+                .isEqualTo("lesson9/test");
 
         // Пример проверки списков (коллекций)
         List<String> actualList = Arrays.asList("one", "two", "three");
