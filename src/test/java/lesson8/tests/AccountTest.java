@@ -45,6 +45,5 @@ public class AccountTest extends BaseTest {
         new Select(driver, "Industry").select("Banking");
         sleep(1000);
 
-        driver.quit();
     }
 }

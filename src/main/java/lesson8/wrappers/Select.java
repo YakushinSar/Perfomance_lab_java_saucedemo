@@ -14,7 +14,7 @@ public class Select {
     }
 
     public void select(String option) {
-        driver.findElement(By.xpath(String.format(SELECT_PATTERN + "select", label)));
+
         driver.findElement(By.xpath(String.format(SELECT_PATTERN + "option[contains(text(), '%s')]", label, option))).click();
     }
 }
