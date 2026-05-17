@@ -28,7 +28,7 @@ public class CheckoutInfoPage extends BasePage {
     }
 
     @Step("Заполнение формы: имя '{firstName}', фамилия '{lastName}', индекс '{postalCode}'")
-    public void addData(String firstName, String lastName, String postalCode) {
+    public CheckoutInfoPage addData(String firstName, String lastName, String postalCode) {
         WebElement firstNameField = driver.findElement(FIRSTNAME_FIELD);
         WebElement lastNameField = driver.findElement(LASTNAME_FIELD);
         WebElement postalCodeField = driver.findElement(POSTAL_CODE);
@@ -40,6 +40,7 @@ public class CheckoutInfoPage extends BasePage {
         firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         postalCodeField.sendKeys(postalCode);
+        return this;
     }
 
     public String getTitle() {
@@ -55,7 +56,8 @@ public class CheckoutInfoPage extends BasePage {
     }
 
     @Step("Нажатие на кнопку Continue")
-    public void clickContinueButton() {
+    public CheckoutOverviewPage clickContinueButton() {
         driver.findElement(CONTINUE_BUTTON).click();
+        return new CheckoutOverviewPage(driver);
     }
 }

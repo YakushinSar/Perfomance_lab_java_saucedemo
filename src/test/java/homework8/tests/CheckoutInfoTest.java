@@ -1,5 +1,6 @@
 package homework8.tests;
 
+import homework8.pages.LoginPage;
 import homework8.utils.Retry;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
@@ -12,15 +13,16 @@ public class CheckoutInfoTest extends BaseTest {
 
     //предусловие для попадания на страницу CheckoutInfoPage
     private void addCartToCheckoutInfo() {
-        loginPage.openPage();
-        loginPage.isPageOpened();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.isPageOpened();
-        productsPage.clickAddToCartButton(0);
-        productsPage.clickAddToCartButton(1);
-        productsPage.clickCartBadge();
-        cartPage.isPageOpened();
-        cartPage.clickCheckoutButton();
+        new LoginPage(driver)
+                .openPage()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
+                .clickAddToCartButton(0)
+                .clickAddToCartButton(1)
+                .clickCartBadge()
+                .isPageOpened()
+                .clickCheckoutButton();
     }
 
     @Test(description = "Проверка, что форма оформления заказа открывается",

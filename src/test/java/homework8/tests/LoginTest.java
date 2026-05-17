@@ -1,5 +1,6 @@
 package homework8.tests;
 
+import homework8.pages.LoginPage;
 import homework8.utils.Retry;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
@@ -20,10 +21,11 @@ public class LoginTest extends BaseTest {
     @Issue("ID-1")
     @Owner("Якушин")
     public void checkLoginWithPositiveCred() {
-        loginPage.openPage();
-        loginPage.isPageOpened();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.isPageOpened();
+        productsPage = new LoginPage(driver)
+                .openPage()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened();
 
         assertEquals(productsPage.getTitle(), "Products");
     }

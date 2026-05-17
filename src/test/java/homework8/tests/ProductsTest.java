@@ -1,5 +1,6 @@
 package homework8.tests;
 
+import homework8.pages.LoginPage;
 import homework8.utils.Retry;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
@@ -11,10 +12,11 @@ public class ProductsTest extends BaseTest {
 
     //предусловие для попадания на страницу CartPage
     void transitionToProductPage() {
-        loginPage.openPage();
-        loginPage.isPageOpened();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.isPageOpened();
+        productsPage = new LoginPage(driver)
+                .openPage()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened();
     }
 
     @Test(description = "Проверка, что список товаров отображается на странице",

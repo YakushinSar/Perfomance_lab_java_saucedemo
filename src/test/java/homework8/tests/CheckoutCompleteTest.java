@@ -1,5 +1,6 @@
 package homework8.tests;
 
+import homework8.pages.LoginPage;
 import homework8.utils.Retry;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
@@ -12,16 +13,21 @@ public class CheckoutCompleteTest extends BaseTest {
 
     //предусловие для попадания на страницу CheckoutInfoPage
     private void addCheckoutOverviewToCheckoutComplete() {
-        loginPage.openPage();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.clickAddToCartButton(0);
-        productsPage.clickAddToCartButton(1);
-        productsPage.clickCartBadge();
-        cartPage.clickCheckoutButton();
-        checkoutInfoPage.addData("Ivanov", "Ivan", "12345");
-        checkoutInfoPage.clickContinueButton();
-        checkoutOverviewPage.isPageOpened();
-        checkoutOverviewPage.clickFinishButton();
+        new LoginPage(driver)
+                .openPage()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
+                .clickAddToCartButton(0)
+                .clickAddToCartButton(1)
+                .clickCartBadge()
+                .isPageOpened()
+                .clickCheckoutButton()
+                .isPageOpened()
+                .addData("Ivanov", "Ivan", "12345")
+                .clickContinueButton()
+                .isPageOpened()
+                .clickFinishButton();
     }
 
     @Test(description = "Проверка, что отображается сообщение об успешном заказе",

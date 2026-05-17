@@ -27,7 +27,8 @@ public class CheckoutOverviewPage extends BasePage {
     }
 
     @Step("Клик на кнопку Finish")
-    public void clickFinishButton() {
+    public CheckoutCompletePage clickFinishButton() {
         driver.findElement(FINISH_BUTTON).click();
+        return new CheckoutCompletePage(driver);
     }
 }

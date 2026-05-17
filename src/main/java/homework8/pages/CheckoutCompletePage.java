@@ -28,8 +28,9 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     @Step("Клик на кнопку Назад в продукты")
-    public void clickBackHomeButton() {
+    public ProductsPage clickBackHomeButton() {
         driver.findElement(BACKHOME_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     public String getSuccessMessage() {

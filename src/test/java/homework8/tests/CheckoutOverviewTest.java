@@ -1,5 +1,6 @@
 package homework8.tests;
 
+import homework8.pages.LoginPage;
 import homework8.utils.Retry;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
@@ -11,18 +12,19 @@ public class CheckoutOverviewTest extends BaseTest {
 
     //предусловие для попадания на страницу CheckoutOverview
     private void addCheckoutInfoToCheckoutOverview() {
-        loginPage.openPage();
-        loginPage.isPageOpened();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.isPageOpened();
-        productsPage.clickAddToCartButton(0);
-        productsPage.clickAddToCartButton(1);
-        productsPage.clickCartBadge();
-        cartPage.isPageOpened();
-        cartPage.clickCheckoutButton();
-        checkoutInfoPage.isPageOpened();
-        checkoutInfoPage.addData("Ivanov", "Ivan", "12345");
-        checkoutInfoPage.clickContinueButton();
+        new LoginPage(driver)
+                .openPage()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
+                .clickAddToCartButton(0)
+                .clickAddToCartButton(1)
+                .clickCartBadge()
+                .isPageOpened()
+                .clickCheckoutButton()
+                .isPageOpened()
+                .addData("Ivanov", "Ivan", "12345")
+                .clickContinueButton();
     }
 
     @Test(description = "Проверка, что кнопка Finish завершает заказ",

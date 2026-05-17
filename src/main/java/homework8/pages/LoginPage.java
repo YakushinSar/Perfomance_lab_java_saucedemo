@@ -25,15 +25,17 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Открытие страницы Login")
-    public void openPage() {
+    public LoginPage openPage() {
         driver.get(BASE_URL);
+        return this;
     }
 
     @Step("Вход в магазин с данными : логин '{user}', пароль '{password}'")
-    public void login(String username, String password) {
+    public ProductsPage login(String username, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(username);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     public String getErrorMessage() {

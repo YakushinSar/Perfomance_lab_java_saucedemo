@@ -1,5 +1,6 @@
 package homework8.tests;
 
+import homework8.pages.LoginPage;
 import homework8.utils.Retry;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
@@ -12,12 +13,13 @@ public class CartTest extends BaseTest {
 
     //предусловие для попадания на страницу CartPage
     private void addProductToCart() {
-        loginPage.openPage();
-        loginPage.isPageOpened();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.isPageOpened();
-        productsPage.clickAddToCartButton(0);
-        productsPage.clickAddToCartButton(1);
+        productsPage = new LoginPage(driver)
+                .openPage()
+                .isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
+                .clickAddToCartButton(0)
+                .clickAddToCartButton(1);
     }
 
     @Test(description = "Проверка, что добавленный товар отображается в корзине",

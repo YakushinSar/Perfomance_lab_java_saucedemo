@@ -30,8 +30,9 @@ public class CartPage extends BasePage {
     }
 
     @Step("Открытие страницы CartPage")
-    public void openPage() {
+    public CartPage openPage() {
         driver.get(BASE_URL + "/cart.html");
+        return this;
     }
 
     // в корзине есть хотя бы один товар
@@ -42,8 +43,9 @@ public class CartPage extends BasePage {
 
     // Удаление товара из корзины
     @Step("Удаление товара из корзины")
-    public void removeFirstItem() {
+    public CartPage removeFirstItem() {
         driver.findElement(REMOVE_BUTTON).click();
+        return this;
     }
 
     // Получение количества товаров в корзине
@@ -64,8 +66,9 @@ public class CartPage extends BasePage {
 
     // Переход назад в каталог
     @Step("Клик на Продолжить покупку")
-    public void backToCatalog() {
+    public ProductsPage backToCatalog() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     // вернулись на страницу товаров
@@ -82,8 +85,10 @@ public class CartPage extends BasePage {
 
     //    Клик на кнопку Checkout
     @Step("Клик на кнопку Checkout")
-    public void clickCheckoutButton() {
+    public CheckoutInfoPage clickCheckoutButton() {
         driver.findElement(CHECKOUT_BUTTON).click();
+        return new CheckoutInfoPage(driver);
+
     }
 }
 

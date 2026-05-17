@@ -32,8 +32,9 @@ public class ProductsPage extends BasePage {
     }
 
     @Step("Открытие страницы Products")
-    public void openPage() {
+    public ProductsPage openPage() {
         driver.get(BASE_URL + "/inventory.html");
+        return this;
     }
 
 
@@ -48,15 +49,17 @@ public class ProductsPage extends BasePage {
 
     // 2. Нажать Add to cart на товаре по индексу
     @Step("Нажатие на кнопку  Add")
-    public void clickAddToCartButton(int index) {
+    public ProductsPage clickAddToCartButton(int index) {
         List<WebElement> buttons = driver.findElements(ADD_TO_CART_BUTTON);
         buttons.get(index).click();
+        return this;
     }
 
     // новый метод!!! добавляющий товар в корзину в зависимости от названия товара, привязываемся к названию товара
     //  String.format это метод, позволяющий вместо переменной подставлять любое значение вместо %s.
-    public void addToCartNew(String productName) {
+    public ProductsPage addToCartNew(String productName) {
         driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, productName))).click();
+        return this;
     }
     /*
     Использование метода в тесте
@@ -81,16 +84,18 @@ public class ProductsPage extends BasePage {
 
     // 4. Сортировка A → Z
     @Step("Сортировка A → Z")
-    public void sortProductsByNameAZ() {
+    public ProductsPage sortProductsByNameAZ() {
         Select sortSelect = new Select(driver.findElement(SORT_DROPDOWN));
         sortSelect.selectByValue("az");
+        return this;
     }
 
     // 5. Сортировка Z → A
     @Step("Сортировка Z → A")
-    public void sortProductsByNameZA() {
+    public ProductsPage sortProductsByNameZA() {
         Select sortSelect = new Select(driver.findElement(SORT_DROPDOWN));
         sortSelect.selectByValue("za");
+        return this;
     }
 
     // 6. Получить название первого товара в списке
@@ -105,7 +110,8 @@ public class ProductsPage extends BasePage {
 
     // 8. Кликнуть на иконку корзины
     @Step("Клик на иконку корзины")
-    public void clickCartBadge() {
+    public CartPage clickCartBadge() {
         driver.findElement(By.className("shopping_cart_link")).click();
+        return new CartPage(driver);
     }
 }
