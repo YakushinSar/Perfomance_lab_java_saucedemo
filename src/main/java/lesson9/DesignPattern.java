@@ -64,26 +64,37 @@ public class LoginPage {
 После загрузки страницы не все элементы могут быть сразу доступны.
 Тест падает из-за попытки взаимодействия с ещё не загруженным элементом.
 Решение:
-Создать базовый класс с методом isPageOpened(), который проверяет,
-что страница действительно загружена (ждёт появления ключевого элемента).
-Идея: перед действиями на странице проверяем, что она действительно загружена.
+-Создаётся абстрактный базовый класс BasePage с методом isPageOpened().BasePage как тип возвращаемого значения означает,
+ что метод isPageOpened() возвращает объект типа BasePage (или любого его наследника).
+-В каждом Page Object переопределяется этот метод с явным ожиданием уникального элемента страницы.isPageOpened() вызывается
+ ПЕРЕД каждым взаимодействием со страницей
+-Метод openPage() открывает страницу и возвращает её объект. Возврат this — позволяет делать цепочки вызовов (но это уже Chain of Invocations)
+Loadable Page не заменяет явные ожидания, а организует их использование.
+-Явные ожидания — это инструмент
+-Loadable Page — это правило, как использовать инструмент
+Без паттерна можно работать (и многие так делают), но с паттерном код становится предсказуемее и надёжнее. Особенно когда
+ тестов много и их пишет команда.
 
+// 1. В BasePage — абстрактный метод
 public abstract class BasePage {
-    public abstract BasePage isPageOpened();  // проверка загрузки
+    public abstract BasePage isPageOpened();
 }
 
+// 2. В каждом наследнике — конкретная проверка загрузки
 public class LoginPage extends BasePage {
     @Override
     public LoginPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOf(loginField));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         return this;
     }
 }
-// Использование:
-new LoginPage(driver)
-    .open()
-    .isPageOpened()     // ← ждём загрузки
-    .login("user", "pass");
+// Использование в тесте :
+LoginPage loginPage = new LoginPage(driver);
+loginPage.openPage();      // Открыли страницу
+loginPage.isPageOpened();  // Дождались загрузки
+
+ProductsPage productsPage = loginPage.login("user", "pass");
+productsPage.isPageOpened();  // ← ждём загрузки следующей страницы
 
 
 # Fluent/Chain of invocations
@@ -104,12 +115,13 @@ page.open()
     .wait();
 
 Как реализовать:
-Каждый метод должен возвращать this (текущий объект).
+Каждый метод должен возвращать this (текущий объект). Метод openPage() открывает страницу и возвращает тот же самый объект
+ LoginPage, чтобы можно было продолжить вызывать его методы.
 public class LoginPage {
     WebDriver driver;
-    public LoginPage open() {
+    public  open() {
         driver.get("https://demo.suiteondemand.com/");
-        return this;  // ← возвращаем текущий объект
+        return this;  // ← возвращаем текущий объект, LoginPage
     }
     public LoginPage login(String user, String password) {
         driver.findElement(By.id("user_name")).sendKeys(user);
@@ -126,30 +138,49 @@ public class LoginPage {
 Если метод переходит на другую страницу:
 public NewAccountPage clickCreateAccount() {
     createAccountButton.click();
-    return new NewAccountPage(driver);  // ← возвращаем новый объект
+    return new NewAccountPage(driver);  // ← новая страница!, возвращаем новый объект
 }
+// Визуально с типами:
+LoginPage    ──login()──>    ProductsPage
+   ↑                             ↑
+return this              return new ProductsPage(driver)
 
 Использование:
-new LoginPage(driver)
+newAccountPage = new LoginPage(driver)
     .login("will", "will")
     .clickCreateAccount()      // ← переход на NewAccountPage
     .addNewAccount(account);   // ← метод уже из NewAccountPage
+где
+// Тип переменной = тип результата последнего вызова в цепочке
+productsPage = new LoginPage(driver)  // LoginPage
+    .openPage()                       // LoginPage
+    .isPageOpened()                   // LoginPage
+    .login("user", "pass")            // ProductsPage ← определяет тип
+    .isPageOpened();                  // ProductsPage
+//  ↑
+// productsPage имеет тип ProductsPage
 
 # Value Object/DTO
 Проблемы:
-1. Некоторые методы принимают СЛИШКОМ МНОГО входных параметров одинакового типа, очередность их неясна
-2. Если в метод необходимо добавить дополнительный параметр - обновлять придется все места, где он использовался
+1. Методы принимают СЛИШКОМ МНОГО параметров одинакового типа, очередность неясна
+2. При добавлении нового параметра — нужно обновлять ВСЕ места вызова
 Решение:
-Если некоторые параметры объединены в логический объект - создавать для него отдельный класс, содержащий все поля. Методы
- работают уже с объектами как входными параметрами. Создается отдельный класс в папке java dto, для полей создается конструктор
- и геттеры. Затем в тесте создаем экземпляр данного класса и передаем его в метод в качестве параметров
-// ❌ Было (много параметров)
-page.addNewAccount("test", "+123456", "avito.ru");
-// ✅ Стало (один объект)
-Account account = new Account("test", "+123456", "avito.ru");
+Создать отдельный класс DTO (Data Transfer Object), который группирует связанные поля. Методы работают с объектом, а не с кучей параметров.
+Как реализовать:
+1. Создать класс в пакете `dto`. DTO должен быть просто "контейнером" для данных, которые не должны меняться после создания.
+2. Добавить поля, конструктор и геттеры
+3. DTO не должен содержать бизнес-логику — только данные
+4. В тесте создать объект DTO и передать в метод
+
+Пример:
+// ❌ Без DTO — при добавлении поля нужно менять ВСЕ места вызова
+page.addNewAccount("test", "+123456", "avito.ru", "test@mail.com");  // новый параметр
+// ✅ С DTO — меняем только конструктор
+Account account = new Account("test", "+123456", "avito.ru", "test@mail.com");
 page.addNewAccount(account);
+
 Короткое пояснение:
-// Создаём класс DTO
+// Создаём класс DTO. В DTO — только данные и геттеры, никакой логики! Рекомендуется делать поля final (неизменяемый объект)
 public class Account {
     private String name;
     private String phone;
