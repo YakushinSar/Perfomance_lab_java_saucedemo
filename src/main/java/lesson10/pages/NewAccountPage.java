@@ -1,6 +1,7 @@
 package lesson10.pages;
 
 import lesson10.dto.Account;
+import lesson10.dto.AccountLombok;
 import lesson10.wrappers.AdressTextArea;
 import lesson10.wrappers.Input;
 import lesson10.wrappers.Select;
@@ -19,19 +20,29 @@ public class NewAccountPage {
 
     }
 
-    //  Value Object/DTO, dto передается в качестве параметров метода (Account account)
+    //  Метод для Account (обычный DTO, dto передается в качестве параметров метода (Account account)
     public void addNewAccount(Account account) {
 //        проверка инпутов
         new Input(driver, "Name").write(account.getName());
         new Input(driver, "Office Phone").write(account.getPhone());
         new Input(driver, "Fax").write(account.getFax());
         new Input(driver, "Website").write(account.getWebsite());
-
 //        проверка текстареа
         new AdressTextArea(driver, "Billing Address", "Street").write(account.getStreet());
         new AdressTextArea(driver, "Shipping Address", "Street").write(account.getStreet());
-
 //      работа с выпадающим списком
+        new Select(driver, "Type").select(account.getType());
+        new Select(driver, "Industry").select(account.getIndustry());
+    }
+
+    // 2. Перегруженный метод для AccountLombok (Lombok DTO с Builder)
+    public void addNewAccount(AccountLombok account) {
+        new Input(driver, "Name").write(account.getName());
+        new Input(driver, "Office Phone").write(account.getPhone());
+        new Input(driver, "Fax").write(account.getFax());
+        new Input(driver, "Website").write(account.getWebsite());
+        new AdressTextArea(driver, "Billing Address", "Street").write(account.getStreet());
+        new AdressTextArea(driver, "Shipping Address", "Street").write(account.getStreet());
         new Select(driver, "Type").select(account.getType());
         new Select(driver, "Industry").select(account.getIndustry());
     }
