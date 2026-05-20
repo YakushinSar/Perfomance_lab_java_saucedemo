@@ -3,6 +3,7 @@ package lesson10.dto;
 import java.util.Objects;
 
 public class Car {
+
     String model;
     int speed;
     // при добавлении нового поля приходится переписывать конструктор и переопределенные методы, чтобы так не делать можно использовать lombok

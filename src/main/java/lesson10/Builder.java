@@ -50,5 +50,17 @@ AccountLombok partialAccount = AccountLombok.builder()
     .name("test")
     .type("Investor")
     .build();
+
+@Builder.Default — это аннотация Lombok, ставит значение по умолчанию, если поле не заполнили в Builder.
+@Builder
+public class User {
+    @Builder.Default
+    private boolean active = true;  // по умолчанию активен
+}
+
+User user = User.builder().build();     // active = true
+User user2 = User.builder().active(false).build();  // active = false
+
+
      */
 }

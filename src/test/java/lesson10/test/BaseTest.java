@@ -2,6 +2,7 @@ package lesson10.test;
 
 import lesson10.pages.LoginPage;
 import lesson10.pages.NewAccountPage;
+import lesson10.step.LoginStep;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 
 public class BaseTest {
 
+    public LoginStep loginStep;
     protected NewAccountPage newAccountPage;
     protected LoginPage loginPage;
     WebDriver driver;
@@ -39,6 +41,7 @@ public class BaseTest {
 
         newAccountPage = new NewAccountPage(driver);
         loginPage = new LoginPage(driver);
+        loginStep = new LoginStep(driver);
     }
 
     @AfterMethod(alwaysRun = true, description = "Закрытие браузера")

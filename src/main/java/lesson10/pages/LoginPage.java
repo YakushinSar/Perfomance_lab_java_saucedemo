@@ -1,10 +1,12 @@
 package lesson10.pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+@Log4j2
 public class LoginPage {
 
     //    Page Factory
@@ -24,11 +26,14 @@ public class LoginPage {
     }
 
     public void open() {
+        log.info("LoginPage open");
+
         driver.get("https://demo.suiteondemand.com/index.php?module=Users&action=Login");
 
     }
 
     public void login(String user, String password) {
+        log.info("Login credentials for user '{}' and password '{}'", user, password);
         loginField.sendKeys(user);
         passwordField.sendKeys(password);
         loginButton.click();

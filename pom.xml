@@ -22,6 +22,9 @@
         <aspectj.version>1.9.20.1</aspectj.version>
         <lombok.version>1.18.46</lombok.version>
         <javafaker.version>1.0.2</javafaker.version>
+        <log4j-core.version>2.26.0</log4j-core.version>
+        <jackson-dataformat-yaml.version>3.0.0</jackson-dataformat-yaml.version>
+
 
         <!-- Версии плагинов -->
         <surefire.version>3.5.4</surefire.version>
@@ -107,6 +110,20 @@
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>${javafaker.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- jackson-dataformat-yaml -->
+        <dependency>
+            <groupId>tools.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson-dataformat-yaml.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

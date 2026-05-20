@@ -8,7 +8,9 @@ import lombok.Getter;
 @Getter
 @Builder
 public class AccountLombok {
-    private String name;
+
+    @Builder.Default    //значения по умолчанию
+    private String name = "test";
     private String phone;
     private String fax;
     private String website;
