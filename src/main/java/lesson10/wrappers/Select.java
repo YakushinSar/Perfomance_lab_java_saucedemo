@@ -18,7 +18,7 @@ public class Select {
 
     public void select(String option) {
 //        делаю аннотацию логирования для метода
-        log.info("Sekecting '{}' inside select '{}'", option, label);
+        log.info("Selecting '{}' inside select '{}'", option, label);
         driver.findElement(By.xpath(String.format(SELECT_PATTERN + "option[contains(text(), '%s')]", label, option))).click();
     }
 }
