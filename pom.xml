@@ -20,6 +20,9 @@
         <hamcrest.version>2.2</hamcrest.version>
         <allure.version>2.17.0</allure.version>
         <aspectj.version>1.9.20.1</aspectj.version>
+        <javafaker.version>1.0.2</javafaker.version>
+        <log4j-core.version>2.26.0</log4j-core.version>
+        <lombok.version>1.18.46</lombok.version>
 
         <!-- Версии плагинов -->
         <surefire.version>3.5.4</surefire.version>
@@ -93,6 +96,26 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
+        </dependency>
+        <!-- javafaker -->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
 
