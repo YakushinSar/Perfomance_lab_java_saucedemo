@@ -20,6 +20,7 @@ public class Lombok {
 ❌ PageObject — не рекомендуется, так как PageObject содержит логику (методы действий), а Lombok скрывает важные методы
  и снижает читаемость
 
+Аннотации:
 1.@Getter / @Setter – добавление Getter и Setter в класс
 2.@ToString – добавление toString в класс
 3.@EqualsAndHashCode – генерация equals и hashCode функций.

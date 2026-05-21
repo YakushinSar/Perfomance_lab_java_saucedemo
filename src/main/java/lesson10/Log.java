@@ -33,28 +33,6 @@ public class Log {
 | **TRACE** | Максимально детально (почти никогда) |
 В автотестах чаще всего используют **INFO**, **WARN**, **ERROR**.
 
-## Важно: формат логов в Log4j2
-❌ Неправильно (как в System.out.println):
-log.info("message: %s %s", text, label);
-✅ Правильно (Log4j2 использует {}):
-log.info("message: {} {}", text, label);
-
-# Использование.
-Логирование работает по капотом ламбока. Классы, которые нужно логировать помечаются аннотацией @Log4j2
-@Log4j2, а методы в пейджах помечаются аннотацией  log.info("Writing '{}' in to '{}'", text, label);
-public class LogTest {
-    @Test
-    public void test() {
-//        уровни логирования
-        log.error("error");
-        log.warn("warn");
-        log.info("info"); // в автотестировании он в основном используется
-        log.debug("debug");
-        log.trace("trace");
-        log.fatal("fatal");
-    }
-}
-
 # Настройка логирования, настраивается для логов уровня INFO - файл log4j2-test.yaml,который лежит в src/test/resources
 #https://springframework.guru/log4j-2-configuration-using-yaml/
 #https://logging.apache.org/log4j/2.x/manual/configuration.html
@@ -98,36 +76,73 @@ Configuration:
           level: INFO
 
 или
+## Настройка логирования log4j2.xml
+**Важно:** Если в папке `src/test/resources` есть файлы `log4j2-test.yaml` или `log4j2.yaml`, Log4j2 использует их, а `log4j2.xml` игнорируется.
+### Куда класть файл:
+`src/test/resources/log4j2.xml`
+### Основные элементы:
+- **Console** — выводит логи в консоль
+- **File** — сохраняет логи в файл
+- **Logger** — настройка для вашего пакета (замените `your.project.package`)
+- **Root** — настройка для всех остальных классов
+### Параметры:
+- `additivity="false"` — логи не дублируются в родительский логгер
+- `level="INFO"` — уровень логирования
+- `fileName` — путь к файлу с логами
+### Как использовать шаблон:
+1. Скопируйте файл `log4j2.xml` в `src/test/resources/`
+2. Замените `your.project.package` на название вашего корневого пакета (например, `homework3`, `homework8`, `com.myproject`)
+### Шаблон для копирования:
+
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns="https://logging.apache.org/xml/ns"
-               xsi:schemaLocation="
-                   https://logging.apache.org/xml/ns
-                   https://logging.apache.org/xml/ns/log4j-config-2.xsd">
+<Configuration>
     <Appenders>
+        <!-- Вывод в консоль -->
         <Console name="CONSOLE">
-            <PatternLayout pattern="%p - %m%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="MAIN" fileName="logs/main.log">
-            <JsonTemplateLayout/>
-        </File>
-        <File name="DEBUG_LOG" fileName="target/info.log">
-            <PatternLayout pattern="%d [%t] %p %c - %m%n"/>
+
+        <!-- Вывод в файл (папка target/logs/) -->
+        <File name="FILE" fileName="target/logs/tests.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c - %msg%n"/>
         </File>
     </Appenders>
+
     <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="CONSOLE" level="INFO"/>
-            <AppenderRef ref="MAIN"/>
-        </Root>
-        <Logger name="org.example" level="INFO">
-            <AppenderRef ref="DEBUG_LOG"/>
+        <!-- Логгер для вашего проекта -->
+        <Logger name="your.project.package" level="INFO" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE"/>
         </Logger>
+
+        <!-- Корневой логгер для всех остальных -->
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
     </Loggers>
 </Configuration>
 
-После того как настроили логирование в проекте, нужно изменить рейтрай и тестлистнер - установить там место вывода на печать
- запись лога через log.warn, в тестлистнере заменить %s на {}
+# Использование.
+Логирование работает по капотом ламбока. Классы, которые нужно логировать помечаются аннотацией @Log4j2, а методы в пейджах
+ помечаются аннотацией  log.info("Writing '{}' in to '{}'", text, label); Классы wrappers (обертки) тоже надо логировать.
+ Логирование в тестах считают избыточным, потому что:
+-Логи уже есть в PageObject'ах и Wrappers (они описывают каждое действие)
+-TestListener уже логирует начало, успех, падение и время теста
+-Если залогировать каждый шаг в тесте, логи станут слишком громоздкими
+Тест (без логов)
+    ↓ вызывает
+PageObject (с логами) → логирует каждое действие
+    ↓ вызывает
+Wrappers (с логами) → логируют конкретные действия с элементами
+
+# Важно: формат логов в Log4j2
+❌ Неправильно (как в System.out.println):
+log.info("message: %s %s", text, label);
+✅ Правильно (Log4j2 использует {}):
+log.info("message: {} {}", text, label);
+
+# После того как настроили логирование в проекте, нужно изменить Retry и TestListener - установить там место вывода на печать
+ запись лога через log.warn, в TestListener заменить %s на {}
 @Log4j2
 public class Retry implements IRetryAnalyzer {
     private int attempt = 1;
@@ -153,7 +168,6 @@ public class Retry implements IRetryAnalyzer {
 
 
 public class TestListener implements ITestListener {
-
     @Override
     public void onTestStart(ITestResult iTestResult) {
         log.info("======================================== STARTING TEST {} ========================================%n", iTestResult.getName());
