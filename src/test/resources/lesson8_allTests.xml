@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Homework Tests">
+
+    <!-- Слушатели -->
+    <listeners>
+        <!-- Для логирования тестов (ITestListener) -->
+        <listener class-name="lesson8.utils.TestListener"/>
+    </listeners>
+
+    <test name="lesson8 Tests">
+        <packages>
+            <package name="lesson8.tests"/>
+        </packages>
+    </test>
+
+</suite>
