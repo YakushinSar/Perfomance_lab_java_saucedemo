@@ -30,43 +30,53 @@ public class GithubActions {
  В файле удаляем лишние строки, указываем способ запуска тестов
 
 Итоговый файл
-   # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+name: Saucedemo build //назавние пайплайна
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Saucedemo build
-
-on:
+on: // тригеры по которым происходит сборка билда
   push:
-    branches: [ "master" ]
+    branches: [ "master" "feature/*" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest // на какой системе на удаленном сервере запусткается джоба
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
+    steps: // шаги
+    - uses: actions/checkout@v4 //  скачивает наш код с гитхаба на вирт машину runs-on: ubuntu-latest
+    - name: Set up JDK 17 // уствноыка java 17, должна соответсствовать версии в pom файле
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
     - name: Tests Run
-      run: mvn clean test
+      run: mvn clean test // запускаются тесты
 
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+Дополнительная инфа для уствновки в файл:
+1. Установка Java
+https://github.com/actions/setup-java
+2. Установка браузеров
+https://github.com/marketplace/actions/setup-br
+owser
 
 Нажать на кнопку commit changes после этоговгитхабе в разделе Actioms появится моя сборка. В Интеледжи идеии сделать pull
- чтобы подтянуть yml файл из гитхаб экшена. В Бейсьесь нужно добавить options.addArguments("--headless");
+ чтобы подтянуть yml файл из гитхаб экшена.
+## Важные моменты:
+
+1. **Headless режим обязателен** — в CI окружении нет браузера с интерфейсом. Добавьте в ChromeOptions: `options.addArguments("--headless");`
+
+2. **Сохранение артефактов** — после прогона тестов полезно загрузить логи и Allure-результаты:
+   ```yaml
+   - name: Upload test logs
+     if: always()
+     uses: actions/upload-artifact@v4
+     with:
+       name: test-logs
+       path: target/logs
+
+
+
      */
 }
