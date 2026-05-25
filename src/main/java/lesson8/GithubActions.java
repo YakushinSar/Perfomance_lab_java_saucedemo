@@ -33,10 +33,11 @@ public class GithubActions {
 name: Saucedemo build //назавние пайплайна
 
 on: // тригеры по которым происходит сборка билда
-  push:
-    branches: [ "master" "feature/*" ]
-  pull_request:
-    branches: [ "master" ]
+      push:
+        branches: [ "master" ]
+      pull_request:
+        branches: [ "master" ]
+      workflow_dispatch:  # 👈 Добавь эту строчку, чтобы запускать вручную из интерфейса GitHub
 
 jobs:
   build:
@@ -52,7 +53,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Tests Run
-      run: mvn clean test // запускаются тесты
+       # Команда для запуска конкретного теста из твоего класса LoginTest
+            run: mvn clean test -Dtest=LoginTest#checkLoginWithPositiveCred
 
 Дополнительная инфа для уствновки в файл:
 1. Установка Java
@@ -76,7 +78,33 @@ owser
        name: test-logs
        path: target/logs
 
+Запуск по расписанию (Cron)
+Чтобы твои тесты, например, с группой smoke, запускались каждое утро в 9:00, добавь в файл .github/workflows/maven.yml блок schedule:
 
+on:
+  schedule:
+    # ┌───────────── минута (0 - 59)
+    # │ ┌───────────── час (0 - 23)
+    # │ │ ┌───────────── день месяца (1 - 31)
+    # │ │ │ ┌───────────── месяц (1 - 12)
+    # │ │ │ │ ┌───────────── день недели (0 - 6, где 0 - воскресенье)
+    # │ │ │ │ │
+    # * * * * *
+    - cron: '0 9 * * *'  # Каждый день в 9:00 UTC
+Как это читать: 0 9 * * * — это "когда минуты = 0, часы = 9, каждый день, каждый месяц, любой день недели". Для проверки
+ синтаксиса можно использовать сайт crontab.guru.
 
+# Способы отключить GitHub Actions
+1. Отключить конкретный workflow (самый простой)
+GitHub → вкладка Actions → выбрать workflow "Saucedemo build" → кнопка "..." справа → Disable workflow
+Включить обратно там же → Enable workflow.
+2. Удалить yml файл
+Просто удалить .github/workflows/maven.yml из репозитория — Actions перестанет запускаться.
+3. Отключить все Actions для репозитория
+GitHub → Settings → Actions → General → выбрать Disable actions → Save.
+
+# Github Actions + Allure
+Документация: https://allurereport.org/docs/integrations-github/
+Пример: https://gist.github.com/borodicht/3012244324d079ca42429daa56b2b8c4
      */
 }

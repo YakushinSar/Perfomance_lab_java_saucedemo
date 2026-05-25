@@ -4,8 +4,7 @@ import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
 public class Retry implements IRetryAnalyzer {
-
-    private static final int MAX_RETRY = 3;
+    private static final int MAX_RETRY = 5;
     private int attempt = 1;
     //  если тест упадет, то мы можем несколько раз его перезапустить, тут 3 раза
 
@@ -15,7 +14,7 @@ public class Retry implements IRetryAnalyzer {
             if (attempt < MAX_RETRY) {
                 attempt++;
                 iTestResult.setStatus(ITestResult.FAILURE);
-                System.out.println("Повторная попытка запуска");
+                System.out.println("Retrying once again");
                 return true;
             } else {
                 iTestResult.setStatus(ITestResult.FAILURE);

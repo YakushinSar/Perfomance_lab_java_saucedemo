@@ -6,8 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-
-    protected final String BASE_URL = "https://www.saucedemo.com/";
+    public final String BASE_URL = "https://www.saucedemo.com/";
     WebDriver driver;
     WebDriverWait wait;
 
