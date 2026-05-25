@@ -25,7 +25,7 @@ jobs:
           cache: maven
 
       - name: Tests Run
-        run: mvn clean test -DsuiteXmlFile=src/test/resources/homework5_allTestsTestNG.xml
+        run: mvn clean test -DsuiteXmlFile=src/test/resources/lesson8_allTests.xml
 
       # Сохранение отчётов о тестах (всегда, даже если тесты упали)
       - name: Upload test reports

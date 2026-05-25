@@ -1,12 +1,10 @@
 package lesson8.utils;
 
-import lesson8.tests.DriverManager;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.util.concurrent.TimeUnit;
-
 
 public class TestListener implements ITestListener {
 
@@ -17,19 +15,14 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        System.out.printf("======================================== FINISHED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
-                getExecutionTime(iTestResult));
+        System.out.printf("======================================== FINISHED TEST %s Duration: %ss ========================================%n",
+                iTestResult.getName(), getExecutionTime(iTestResult));
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
-                getExecutionTime(iTestResult));
-
-        // Скриншот при падении
-        AllureUtils.takeScreenshot(DriverManager.getDriver());
-//        WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
-//        AllureUtils.takeScreenshot(driver);
+        System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n",
+                iTestResult.getName(), getExecutionTime(iTestResult));
     }
 
     @Override
@@ -39,17 +32,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-
+        // Не используется
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
+        // Не используется
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-
+        // Не используется
     }
 
     private long getExecutionTime(ITestResult iTestResult) {

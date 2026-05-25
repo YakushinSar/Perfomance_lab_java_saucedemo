@@ -4,6 +4,9 @@
 
     <!-- Слушатели -->
     <listeners>
+        <!-- Для глобального ретрая (IRetryAnalyzer) -->
+        <listener class-name="lesson8.utils.AnnotationTransformer"/>
+
         <!-- Для логирования тестов (ITestListener) -->
         <listener class-name="lesson8.utils.TestListener"/>
     </listeners>
