@@ -26,6 +26,7 @@
 
         <!-- Версии плагинов -->
         <surefire.version>3.5.4</surefire.version>
+        <suiteXmlFile>src/test/resources/lesson8_allTests.xml</suiteXmlFile>
     </properties>
 
     <dependencyManagement>
@@ -133,6 +134,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
                 <configuration>
+                    <!-- ✅ Добавлено: передаём XML через -DsuiteXmlFile из командной строки -->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
