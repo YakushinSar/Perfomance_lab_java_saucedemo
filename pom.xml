@@ -23,6 +23,7 @@
         <javafaker.version>1.0.2</javafaker.version>
         <log4j-core.version>2.26.0</log4j-core.version>
         <lombok.version>1.18.46</lombok.version>
+        <selenide.version>7.16.2</selenide.version>
 
         <!-- Версии плагинов -->
         <surefire.version>3.5.4</surefire.version>
@@ -116,6 +117,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <!-- selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
